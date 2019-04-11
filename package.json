@@ -18,6 +18,7 @@
   ],
   "main": "src/loader.js",
   "scripts": {
+    "release": "standard-version",
     "dev": "webpack-dev-server --hot --inline --progress --colors",
     "production": "webpack --progress -p"
   },
