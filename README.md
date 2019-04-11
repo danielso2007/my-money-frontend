@@ -68,3 +68,33 @@ yarn add react react-dom react-router redux react-redux redux-form redux-multi r
 yarn add react-router-dom --dev
 yarn add webpack-cli --dev
 ```
+
+### 1) Configurar o repositório remoto
+
+```bash
+$ heroku git:remote -a estudo-my-money-frontend
+```
+
+### 2) Configurar as variáveis de ambiente que a aplicação **_backend_** usa.
+
+```bash
+$ heroku config:set URL_BACKEND=https://estudo-my-money-app-backend.herokuapp.com
+```
+
+### 3) Fazer deploy da aplicação via **push** no repositório.
+
+```bash
+$ git push heroku master
+```
+
+### 4) Definir o tipo de escalonamento mínimo (grátis) - Passo **Opcional**
+
+```bash
+$ heroku ps:scale web=1
+```
+
+### 5) Consultar o log e verificar se tudo ocorreu bem - Passo **Opcional**
+
+```bash
+$ heroku logs --tail
+```
