@@ -45,6 +45,3 @@ dist/
 
 package-lock.json
 yarn.lock
-public/app.js
-public/fonts
-public/main.css
