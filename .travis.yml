@@ -4,4 +4,4 @@ node_js:
 cache: yarn
 before_script:
   - yarn install
-script: yarn run compile
+script: yarn dev
