@@ -4,4 +4,4 @@ node_js:
 cache: yarn
 before_script:
   - yarn install
-script: yarn dev
+script: yarn production
