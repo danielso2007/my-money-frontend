@@ -20,7 +20,7 @@
   "scripts": {
     "release": "standard-version",
     "dev": "webpack-dev-server --hot --inline --progress --colors",
-    "production": "webpack --progress -p"
+    "production": "NODE_ENV=production webpack --progress -p"
   },
   "dependencies": {
     "morris.js": "^0.5.0"
