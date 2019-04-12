@@ -98,3 +98,15 @@ $ heroku ps:scale web=1
 ```bash
 $ heroku logs --tail
 ```
+
+# Gerando o CHANGELOG do projeto
+
+```
+npm run release -- --release-as 1.1.0  --dry-run
+
+npm run release -- --release-as patch --dry-run
+
+npm run release -- --release-as minor  --dry-run
+
+npm run release -- --release-as major  --dry-run
+```
