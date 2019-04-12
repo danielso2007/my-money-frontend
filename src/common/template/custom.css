@@ -107,3 +107,8 @@ body {
 .height_50 {
     height: 50px;
 }
+
+.menuItemActive {
+  color: #fff !important;
+  font-weight: 600 !important;
+}
