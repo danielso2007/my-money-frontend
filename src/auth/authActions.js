@@ -3,10 +3,12 @@ import axios from 'axios';
 import consts from '../consts';
 
 export function login(values) {
+    console.log(`${consts.OAPI_URL}/login`);
     return submit(values, `${consts.OAPI_URL}/login`);
 }
 
 export function signup(values) {
+    console.log(`${consts.OAPI_URL}/signup`);
     return submit(values, `${consts.OAPI_URL}/signup`);
 }
 
