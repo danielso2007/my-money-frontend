@@ -21,8 +21,7 @@
     "release": "standard-version",
     "dev": "webpack-dev-server --hot --inline --progress --colors",
     "production": "NODE_ENV=production webpack --progress -p",
-    "start": "npm run production",
-    "heroku-postbuild": "http-server -p $PORT"
+    "heroku-postbuild": "npm run production"
   },
   "dependencies": {
     "morris.js": "^0.5.0",
