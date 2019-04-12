@@ -9,6 +9,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = () => {
     if (process.env.NODE_ENV === 'production') {
         console.log('Welcome to production');
+        process.env.URL_BACKEND = 'https://estudo-my-money-app-backend.herokuapp.com';
     }
     if (process.env.URL_BACKEND) {
         console.log('Usando URL backend: ', process.env.URL_BACKEND);
