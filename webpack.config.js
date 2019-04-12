@@ -53,7 +53,6 @@ module.exports = () => {
         }),
         new webpack.EnvironmentPlugin({
             NODE_ENV: 'development', // use 'development' unless process.env.NODE_ENV is defined,
-            URL_BACKEND: 'http://localhost:3003',
             DEBUG: false
         }),
         new webpack.DefinePlugin({
