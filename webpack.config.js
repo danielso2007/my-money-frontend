@@ -22,7 +22,8 @@ function createModules(devMode) {
             },
         }
     };
-    let ruleCSS = {test: /\.(sa|sc|c)ss$/,
+    let ruleCSS = {
+        test: /\.(sa|sc|c)ss$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -34,10 +35,12 @@ function createModules(devMode) {
           },
           'css-loader',
     ]};
-    let ruleImage = {test: /\.(png|svg|jpg|gif)$/,
+    let ruleImage = {
+        test: /\.(png|svg|jpg|gif)$/,
         use: [{loader: 'file-loader', 
         options: { name: '[name].[ext]', outputPath: 'images/' }}]};
-    let ruleFonts = {test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/, 
+    let ruleFonts = {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/, 
         use: [{loader: 'file-loader', 
         options: { name: '[name].[ext]', outputPath: 'fonts/' }}]};
     
@@ -62,7 +65,7 @@ function createPlugins(devMode) {
         'process.env.DEBUG': JSON.stringify(process.env.DEBUG)
     });
     let htmlWebpackPlugin = new HtmlWebpackPlugin({
-        template: path.join(__dirname, 'src/public/index.html'),
+        template: path.join(__dirname, 'layout/index.html'),
         minify: {
             collapseWhitespace: true,
             removeComments: true,
@@ -79,8 +82,8 @@ function createPlugins(devMode) {
     });
     let providePlugin = new webpack.ProvidePlugin({$: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery'});
     let copyWebpackPlugin = new CopyWebpackPlugin([
-        {from: path.join(__dirname, 'src/public/images'),to: path.join(__dirname, 'public/images')},
-        {from: path.join(__dirname, 'src/public/images/favicon'),to: path.join(__dirname, 'public/images/favicon')}
+        {from: path.join(__dirname, 'layout/images'),to: path.join(__dirname, 'public/images')},
+        {from: path.join(__dirname, 'layout/images/favicon'),to: path.join(__dirname, 'public/images/favicon')}
     ]);
     return [
         providePlugin,
