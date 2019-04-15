@@ -4,7 +4,9 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserJSPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -25,13 +27,14 @@ function createModules(devMode) {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: devMode,
-              reloadAll: true,
+                publicPath: '../',
+                hmr: devMode,
+                reloadAll: true
             },
           },
           'css-loader',
     ]};
-    let ruleImage = {test: /\.(png|svg|jpg|gif)$/, 
+    let ruleImage = {test: /\.(png|svg|jpg|gif)$/,
         use: [{loader: 'file-loader', 
         options: { name: '[name].[ext]', outputPath: 'images/' }}]};
     let ruleFonts = {test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/, 
@@ -39,8 +42,8 @@ function createModules(devMode) {
         options: { name: '[name].[ext]', outputPath: 'fonts/' }}]};
     
     return {rules: [
+        ruleCSS,
         ruleJsx,
-        ruleCSS, 
         ruleImage, 
         ruleFonts]};
 }
@@ -49,7 +52,7 @@ function createPlugins(devMode) {
     let cleanWebpackPlugin = new CleanWebpackPlugin();
     let miniCssExtractPlugin = new MiniCssExtractPlugin({
         filename: devMode ? '[name].css' : '[name].[contenthash].css',
-        chunkFilename: devMode ? '[name].[id].css' : '[name].[id].[contenthash].css',
+        chunkFilename: devMode ? '[id].bundle.css' : '[id].[contenthash].bundle.css',
     });
     let webpackEnvironmentPlugin = new webpack.EnvironmentPlugin({
         NODE_ENV: 'development', 
@@ -107,27 +110,40 @@ function createServer() {
 
 function createOptimization(devMode) {
     return {
+        minimizer: [
+            new TerserJSPlugin({extractComments: true}), 
+            new OptimizeCSSAssetsPlugin({
+                cssProcessorPluginOptions: {
+                    preset: ['default', { discardComments: { removeAll: true } }],
+                }
+            })],
         splitChunks: {
             chunks: 'all',
             minSize: 30000,
             maxSize: 0,
             minChunks: 1,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
+            maxAsyncRequests: 8,    
+            maxInitialRequests: 8,
             automaticNameDelimiter: '.',
-            name: true,
+            name: false,
             cacheGroups: {
-                vendors: {
-                    name: 'vendors',
-                    filename: devMode ? '[name].bundle.js' : '[name].[contenthash].bundle.js',
+                node_vendor: {
+                    name: 'node_vendor',
                     test: /[\\/]node_modules[\\/]/,
-                    enforce: true,
-                    priority: -10
-                },
-                default: {
-                    minChunks: 2,
-                    priority: -20,
+                    priority: -10,
                     reuseExistingChunk: true
+                },
+                commons: {
+                    test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom|react-redux|react-redux-toastr|redux|redux-form|redux-multi|redux-promise|redux-thunk)[\\/]/,
+                    name: 'commons',
+                    priority: 1,
+                    reuseExistingChunk: true
+                },
+                styles: {
+                    name: 'styles',
+                    test: /[\\/]node_modules[\\/](\.css$)/,
+                    chunks: 'all',
+                    enforce: true,
                 }
             }
         }
@@ -153,7 +169,7 @@ function createWebpackConfig(devMode) {
     };
     webpackConfig.output = {
         filename: devMode ? '[name].bundle.js' : '[name].[contenthash].bundle.js',
-        chunkFilename: devMode ? '[name].bundle.js' : '[name].[contenthash].bundle.js',
+        chunkFilename: devMode ? '[id].bundle.js' : '[id].[contenthash].bundle.js',
         path: path.resolve(__dirname, 'public')
     };
 

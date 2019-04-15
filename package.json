@@ -19,17 +19,15 @@
   "main": "src/loader.js",
   "scripts": {
     "release": "standard-version",
-    "build": "NODE_ENV=development webpack --development",
+    "build": "NODE_ENV=development webpack --development --mode=development",
     "profile": "webpack --profile --json > stats.json",
     "watch": "webpack --watch",
     "dev": "webpack-dev-server --hot --inline --progress --colors",
-    "production": "NODE_ENV=production webpack --progress -p --production",
+    "production": "NODE_ENV=production webpack --progress -p --production --mode=production",
     "heroku-postbuild": "npm run production"
   },
   "dependencies": {
-    "html-minifier-webpack-plugin": "^2.0.0",
-    "http-server": "0.11.1",
-    "morris.js": "^0.5.0"
+    "http-server": "0.11.1"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -51,6 +49,7 @@
     "ionicons": "3.0.0",
     "lodash": "^4.17.11",
     "mini-css-extract-plugin": "^0.6.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-redux": "^6.0.1",
@@ -63,6 +62,7 @@
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
     "standard-version": "^5.0.2",
+    "terser-webpack-plugin": "^1.2.3",
     "webpack": "^4.30.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.3.0",

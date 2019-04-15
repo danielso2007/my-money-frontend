@@ -10,6 +10,5 @@ import 'modules/admin-lte/plugins/timepicker/bootstrap-timepicker.min.js';
 import 'modules/admin-lte/plugins/bootstrap-slider/bootstrap-slider.js';
 import 'modules/admin-lte/dist/js/adminlte.min.js';
 
-//import 'modules/admin-lte/plugins/iCheck/flat/blue.css';
 import './custom.css';
 import '../../auth/auth.css';
