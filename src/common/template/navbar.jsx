@@ -22,12 +22,12 @@ class Navbar extends Component {
                     <li id='dropdown_user' onMouseLeave={() => this.changeOpen()} className={`dropdown user user-menu ${this.state.open ? 'open' : ''}`}>
                         <a id='dropdown_user_link' href="javascript:;" onClick={() => this.changeOpen()} aria-expanded={this.state.open ? 'true' : 'false'}
                                             className="dropdown-toggle height_50" data-toggle="dropdown">
-                            <img src="http://lorempixel.com/160/160/sports/My-Money/" className="user-image" alt="User Image" />
+                            <img src="http://lorempixel.com/160/160/" className="user-image" alt="User Image" />
                             <span className="hidden-xs">{name}</span>
                         </a>
                         <ul id='dropdown-menu' className="dropdown-menu">
                             <li id='dropdown-menu-image' className="user-header">
-                                <img src="http://lorempixel.com/160/160/sports/My-Money/" className="img-circle" alt="User Image" />
+                                <img src="http://lorempixel.com/160/160/" className="img-circle" alt="User Image" />
                                 <p>{name}<small>{email}</small></p>
                             </li>
                             <li id='dropdown-menu-button-exit' className="user-footer">
